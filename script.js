@@ -3,15 +3,23 @@ if(localStorage.getItem("gameData"))
     gameData = JSON.parse(localStorage.getItem("gameData"));
 else
     gameData = {
-        currentText: -1,
+        currentText: 0,
         winCount: 0,
         loseCount: 0,
         meme: true
     };
-
-nextText();
-document.querySelector(".loseCount").innerHTML = gameData.loseCount;
-document.querySelector(".winCount").innerHTML = gameData.winCount;
+updateScreen();
+function updateScreen(){
+    document.querySelector(".loseCount").innerHTML = gameData.loseCount;
+    document.querySelector(".winCount").innerHTML = gameData.winCount;
+	if(gameData.currentText > 152 && gameData.winCount==69 && gameData.meme){
+        gameData.currentText -= 1;
+       	document.querySelector(".text").innerHTML = "nice";
+		gameData.meme = false;
+	} else {
+        document.querySelector(".text").innerHTML = texts[gameData.currentText];
+    }
+}
 
 var winBtn = document.querySelector(".winBtn");
 var loseBtn = document.querySelector(".loseBtn");
@@ -32,7 +40,6 @@ winBtn.onclick = function(){
 	winSound.currentTime = 0;
 	winSound.play();
     gameData.winCount += 1;
-    document.querySelector(".winCount").innerHTML = gameData.winCount;
     nextText();
 }
 
@@ -42,32 +49,23 @@ loseBtn.onclick = function(){
 	loseSound.currentTime = 0;
 	loseSound.play();
     gameData.loseCount += 1;
-    document.querySelector(".loseCount").innerHTML = gameData.loseCount;
     nextText();
 }
 
 function nextText(){
-    localStorage.setItem("gameData", JSON.stringify(gameData));
     if(gameData.currentText < texts.length - 1)
     {
-		if(gameData.currentText > 151 && gameData.winCount==69 && gameData.meme){
-        	document.querySelector(".text").innerHTML = "nice";
-			gameData.meme = false;
-		}
-		else{
-        	gameData.currentText += 1;
-        	document.querySelector(".text").innerHTML = texts[gameData.currentText];
-		}
+        gameData.currentText += 1;
     }
+    updateScreen();
+    localStorage.setItem("gameData", JSON.stringify(gameData));
 }
 
 function restart(){
-	gameData.currentText=-1;
-	nextText();
+	gameData.currentText=0;
 	gameData.meme = true;
     gameData.winCount = 0;
     gameData.loseCount = 0;
-    document.querySelector(".loseCount").innerHTML = gameData.loseCount;
-    document.querySelector(".winCount").innerHTML = gameData.winCount;
+    updateScreen();
     localStorage.setItem("gameData", JSON.stringify(gameData));
 }
