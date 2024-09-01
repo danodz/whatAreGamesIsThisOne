@@ -111,7 +111,6 @@ function restart(){
 function hasVerticalScroll(node){
     if(node == undefined){
         if(window.innerHeight){
-            console.log( document.body.offsetHeight, window.innerHeight);
             return document.body.offsetHeight> window.innerHeight;
         }
         else {
@@ -123,4 +122,18 @@ function hasVerticalScroll(node){
     else {
         return node.scrollHeight> node.offsetHeight;
     }
+}
+
+function openHistory(){
+    const historyWindow = document.querySelector(".history");
+    const historyContent = document.querySelector(".history .content");
+    historyWindow.classList.remove("hidden");
+    historyContent.innerHTML = "<p>- Press the blue triangle to win. Press the red square to lose.</p>"; 
+    for(let i = 1; i<gameData.currentText; i++){
+        historyContent.innerHTML += "<p>- " + texts[i] + "</p>";
+    }
+}
+
+function closeHistory(){
+    document.querySelector(".history").classList.add("hidden");
 }
