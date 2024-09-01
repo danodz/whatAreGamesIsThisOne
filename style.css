@@ -4,20 +4,20 @@ body{
     padding: 0;
 }
 
+button{
+    font-size: inherit;
+}
+
 .global{
     margin: 10px;
 }
 
 .topBtns{
-    overflow: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
-.restart{
-    font-size: 40px;
-}
-
-.textLink{
-    float: right;
+.topBtns{
     font-size: 40px;
 }
 
@@ -43,6 +43,12 @@ body{
     .caracteristics{
         width: 33%;
         position: absolute;
+    }
+}
+
+@media (max-width: 1000px) {
+    .topBtns{
+        font-size: 30px;
     }
 }
 
@@ -117,10 +123,6 @@ body{
         border-bottom: 100px solid blue;
     }
 
-    .restart{
-        font-size: 25px;
-    }
-    
     .rules{
         font-size: 20px;
         margin-top: 15px;
@@ -136,10 +138,21 @@ body{
     }
 }
 
-@media (max-width: 650px) {
-    .textLink{
+@media (max-width: 700px) {
+    .topBtns{
         font-size: 25px;
-        width: 165px;
+    }
+}
+
+@media (max-width: 600px) {
+    .topBtns{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 475px) {
+    .topBtns{
+        font-size: 15px;
     }
 }
 
